@@ -2,6 +2,11 @@ import { Router } from 'express';
 
 const routes = Router();
 
+routes.get("/api/hello", (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ result: "grenUIlle backend is running." }));
+});
+
 /**
  * GET home page
  */
