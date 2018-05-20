@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Container, Grid } from "semantic-ui-react";
+import QueryInput from "./QueryInput";
+import Header from "./Header";
+import Results from "./Results";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {server: null };
-  }
-
-  async componentDidMount() {
-    const result = await fetch("/api/hello");
-    const data = await result.json();
-    this.setState({ server: data.result });
+    this.state = { server: null };
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to gremUIlle</h1>
-        </header>
-        <p className="App-intro">
-          {this.state.server || "..." }
-        </p>
-      </div>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Header />
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <QueryInput />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <Results />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }
