@@ -59,6 +59,8 @@ typings/
 
 # dotenv environment variables file
 .env
+config.js
+!config.example.js
 
 # Custom
 .idea

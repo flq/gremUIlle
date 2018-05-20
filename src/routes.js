@@ -1,11 +1,7 @@
-import { Router } from 'express';
+import { Router } from "express";
+import { client } from "./gremlin"
 
 const routes = Router();
-
-routes.get("/api/hello", (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ result: "grenUIlle backend is running." }));
-});
 
 /**
  * GET home page
@@ -14,28 +10,20 @@ routes.get('/', (req, res) => {
   res.render('index', { title: 'Express Babel' });
 });
 
-/**
- * GET /list
- *
- * This is a sample route demonstrating
- * a simple approach to error handling and testing
- * the global error handler. You most certainly want to
- * create different/better error handlers depending on
- * your use case.
- */
-routes.get('/list', (req, res, next) => {
-  const { title } = req.query;
-
-  if (title == null || title === '') {
-    // You probably want to set the response HTTP status to 400 Bad Request
-    // or 422 Unprocessable Entity instead of the default 500 of
-    // the global error handler (e.g check out https://github.com/kbariotis/throw.js).
-    // This is just for demo purposes.
-    next(new Error('The "title" parameter is required'));
-    return;
-  }
-
-  res.render('index', { title });
+routes.get("/api/hello", (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ result: "grenUIlle backend is running." }));
 });
+
+routes.get("/api/query", (req, res) => {
+  client().execute("g.V().hasLabel('News').outE().values('label').dedup()", (err, results) => {
+    res.setHeader('Content-Type', 'application/json');
+    console.log(err);
+    console.log(results);
+    res.send(JSON.stringify(results));
+  });
+});
+
+
 
 export default routes;
