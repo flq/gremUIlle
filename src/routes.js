@@ -7,22 +7,21 @@ const routes = Router();
  * GET home page
  */
 routes.get('/', (req, res) => {
-  res.render('index', { title: 'Express Babel' });
+  res.render('index', { title: 'gremUIlle' });
 });
 
-routes.get("/api/hello", (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ result: "grenUIlle backend is running." }));
-});
-
-routes.get("/api/query", (req, res) => {
-  client().execute("g.V().hasLabel('News').outE().values('label').dedup()", (err, results) => {
+routes.post("/api/query", (req, res) => {
+  const { query } = req.body;
+  client().execute(query, (err, results) => {
     res.setHeader('Content-Type', 'application/json');
-    console.log(err);
-    console.log(results);
+    if (err) {
+      console.error(err);
+      res.send(JSON.stringify({error: err.toString()}));
+      return;
+    }
     res.send(JSON.stringify(results));
   });
-});
+}); 
 
 
 

@@ -7,19 +7,19 @@ const panes = [
   { menuItem: 'Visual', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> }
 ]
 
-function JsonPane() {
+function JsonPane({results}) {
     return (
         <Tab.Pane>
             <ReactJson 
             name="results"
             displayDataTypes={false}
-            src={{ firstname: "John", lastname: "Doe", children: [{ name: "Chica"}, { name: "Letta"}] }} />
+            src={results} />
         </Tab.Pane>
     )
 }
 
-export default function Results() {
+export default function Results(props) {
     return (
-        <Tab panes={panes} />
+        <Tab panes={panes} {...props} />
     );
 }
