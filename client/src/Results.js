@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab } from 'semantic-ui-react';
 import ReactJson from 'react-json-view';
+import { onlyUpdateForKeys } from 'recompose';
 
 const panes = [
   { menuItem: 'JSON', render: JsonPane },
@@ -18,8 +19,10 @@ function JsonPane({results}) {
     )
 }
 
-export default function Results(props) {
+function Results(props) {
     return (
         <Tab panes={panes} {...props} />
     );
 }
+
+export default onlyUpdateForKeys(["results"])(Results);

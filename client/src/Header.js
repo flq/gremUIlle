@@ -1,7 +1,7 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Message } from "semantic-ui-react";
 
-export default function Header() {
+export default function Header({ error }) {
   return (
     <Menu attached="top">
       <Menu.Item>
@@ -9,6 +9,11 @@ export default function Header() {
           <em>gremUIlle</em>
         </h3>
       </Menu.Item>
+      {error ? (
+        <Menu.Item>
+          <Message negative>{error}</Message>
+        </Menu.Item>
+      ) : null}
     </Menu>
   );
 }

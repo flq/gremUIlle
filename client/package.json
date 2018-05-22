@@ -6,6 +6,7 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-hotkeys": "^1.1.4",
     "react-json-view": "^1.16.6",
     "react-scripts": "1.1.4",
     "recompose": "^0.27.1",
